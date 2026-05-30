@@ -1,0 +1,88 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Programming Quotes API — Authentication"
+  description: >-
+    Programming Quotes — Authentication. 1 operation. Lead operation: Programming
+    Quotes Issue Auth Token. Self-contained Naftiko capability covering one
+    Programming Quotes business surface.
+  tags:
+    - Programming Quotes
+    - Authentication
+    - Open Source
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+binds:
+  - namespace: env
+    keys:
+      PROGRAMMING_QUOTES_EMAIL: PROGRAMMING_QUOTES_EMAIL
+      PROGRAMMING_QUOTES_PASSWORD: PROGRAMMING_QUOTES_PASSWORD
+
+capability:
+
+  # ── 1. Consumes — upstream auth surface ────────────────────────────────
+  consumes:
+    - type: http
+      namespace: "programming-quotes-authentication"
+      baseUri: "https://programming-quotes-api.azurewebsites.net/api"
+      description: "Programming Quotes API — Authentication business capability. Self-contained, no shared references."
+      resources:
+        - name: "auth-token"
+          path: "/auth/token"
+          operations:
+            - name: "issueAuthToken"
+              method: POST
+              description: "Exchange email and password for a JWT bearer token. Auto-registers new emails."
+              inputParameters:
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Credentials payload `{email, password}`."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  # ── 2. REST exposer ────────────────────────────────────────────────────
+  exposes:
+    - type: rest
+      namespace: "programming-quotes-authentication-rest"
+      port: 8080
+      description: "REST adapter for Programming Quotes — Authentication. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/auth/token"
+          name: "auth-token"
+          description: "REST surface for the auth token exchange."
+          operations:
+            - method: POST
+              name: "issueAuthToken"
+              description: "Exchange credentials for a JWT bearer token."
+              call: "programming-quotes-authentication.issueAuthToken"
+              with:
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    # ── 3. MCP exposer ──────────────────────────────────────────────────
+    - type: mcp
+      namespace: "programming-quotes-authentication-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Programming Quotes — Authentication. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "issue-auth-token"
+          description: "Exchange email and password for a JWT bearer token."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "programming-quotes-authentication.issueAuthToken"
+          with:
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."

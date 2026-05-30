@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-schema/programming-quotes-quote-schema.json",
+  "title": "Quote",
+  "description": "A programming quote in the corpus.",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string",
+      "description": "MongoDB ObjectId for the quote.",
+      "example": "5e6b3e6e3f5a8e2d1c4b9876"
+    },
+    "id": {
+      "type": "string",
+      "description": "Alias of `_id` for client convenience (some mirrors expose this).",
+      "example": "5e6b3e6e3f5a8e2d1c4b9876"
+    },
+    "author": {
+      "type": "string",
+      "description": "Quote author's name (e.g. `Edsger W. Dijkstra`).",
+      "example": "Edsger W. Dijkstra"
+    },
+    "en": {
+      "type": "string",
+      "description": "English quote text (legacy multilingual field, may be absent on the current API).",
+      "example": "Simplicity is prerequisite for reliability."
+    },
+    "text": {
+      "type": "string",
+      "description": "Quote text. The current canonical API exposes this field; legacy multilingual deployments use `en`/`sr`/etc.",
+      "example": "Simplicity is prerequisite for reliability."
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional source citation for the quote (book, talk, blog post).",
+      "example": "EWD498 — How do we tell truths that might hurt?"
+    },
+    "rating": {
+      "type": "number",
+      "format": "float",
+      "description": "Average user vote (1-5).",
+      "minimum": 1,
+      "maximum": 5,
+      "example": 4.7
+    },
+    "numberOfVotes": {
+      "type": "integer",
+      "description": "Count of votes that contributed to the rating.",
+      "minimum": 0,
+      "example": 42
+    }
+  },
+  "required": ["author"]
+}

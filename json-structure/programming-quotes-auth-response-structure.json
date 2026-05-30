@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-structure/programming-quotes-auth-response-structure.json",
+  "name": "AuthResponse",
+  "description": "JWT bearer token response.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "JWT bearer token. Use as `Authorization: Bearer <token>`."
+    }
+  },
+  "required": ["token"]
+}

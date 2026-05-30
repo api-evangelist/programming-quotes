@@ -1,0 +1,66 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "pq": "https://github.com/skolakoda/programming-quotes-api/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Quote": "schema:Quotation",
+    "QuoteInput": "pq:QuoteInput",
+    "QuoteUpdate": "pq:QuoteUpdate",
+    "VoteInput": "pq:VoteInput",
+    "AuthRequest": "pq:AuthRequest",
+    "AuthResponse": "pq:AuthResponse",
+
+    "id": {
+      "@id": "dcterms:identifier",
+      "@type": "xsd:string"
+    },
+    "_id": {
+      "@id": "dcterms:identifier",
+      "@type": "xsd:string"
+    },
+    "author": {
+      "@id": "schema:author",
+      "@type": "xsd:string"
+    },
+    "text": {
+      "@id": "schema:text",
+      "@type": "xsd:string"
+    },
+    "en": {
+      "@id": "schema:text",
+      "@type": "xsd:string",
+      "@language": "en"
+    },
+    "source": {
+      "@id": "schema:isBasedOn",
+      "@type": "xsd:string"
+    },
+    "rating": {
+      "@id": "schema:aggregateRating",
+      "@type": "xsd:float"
+    },
+    "numberOfVotes": {
+      "@id": "schema:ratingCount",
+      "@type": "xsd:integer"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "password": {
+      "@id": "pq:password",
+      "@type": "xsd:string"
+    },
+    "token": {
+      "@id": "pq:token",
+      "@type": "xsd:string"
+    },
+    "newVote": {
+      "@id": "pq:new_vote",
+      "@type": "xsd:integer"
+    }
+  }
+}

@@ -1,0 +1,528 @@
+openapi: 3.0.3
+info:
+  title: Programming Quotes API
+  description: |
+    Free, open-source REST API serving a curated collection of programming-related
+    quotes. Public endpoints return random quotes, paginated lists, author filters,
+    and single-quote lookups. Authenticated endpoints support voting, favoriting,
+    and quote CRUD for contributors.
+
+    Canonical source: https://github.com/skolakoda/programming-quotes-api
+  version: 1.0.0
+  contact:
+    name: Programming Quotes API (skolakoda)
+    url: https://github.com/skolakoda/programming-quotes-api
+  license:
+    name: Community / Unlicensed
+    url: https://github.com/skolakoda/programming-quotes-api
+  x-generated-from: documentation
+  x-last-validated: '2026-05-30'
+servers:
+  - url: https://programming-quotes-api.azurewebsites.net/api
+    description: Primary Azure-hosted deployment (canonical)
+  - url: https://programming-quotesapi.vercel.app/api
+    description: Community Vercel mirror (legacy / unofficial)
+  - url: https://api.programming-quotes.onrender.com/api
+    description: Community Render mirror (legacy / unofficial)
+  - url: https://programming-quotes-api.herokuapp.com/api
+    description: Legacy Heroku deployment (deprecated)
+tags:
+  - name: Quotes
+    description: Programming Quotes — Public read and authenticated write endpoints for quotes.
+  - name: Authors
+    description: Programming Quotes — Author-scoped quote lookups (filter on the quotes endpoint).
+  - name: Authentication
+    description: Programming Quotes — JWT login / register exchange.
+paths:
+  /quotes/random:
+    get:
+      summary: Programming Quotes Get Random Quote
+      description: Return a single random programming quote from the corpus.
+      operationId: getRandomQuote
+      tags:
+        - Quotes
+      responses:
+        '200':
+          description: A single random quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /quotes:
+    get:
+      summary: Programming Quotes List Quotes
+      description: |
+        Return a paginated list of programming quotes. Supports optional filtering by
+        author name (URL-encoded with underscores in place of spaces, e.g. `Edsger_W._Dijkstra`).
+      operationId: listQuotes
+      tags:
+        - Quotes
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: 1-based page number for pagination.
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: quotesPerPage
+          in: query
+          required: false
+          description: Number of quotes to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: author
+          in: query
+          required: false
+          description: Filter quotes by author. Use underscores in place of spaces (e.g. `Linus_Torvalds`).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paginated array of quotes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quote'
+        '400':
+          description: Invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Programming Quotes Create Quote
+      description: Create a new programming quote. Requires JWT authentication.
+      operationId: createQuote
+      tags:
+        - Quotes
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Quote payload to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteInput'
+      responses:
+        '201':
+          description: The newly created quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400':
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /quotes/{id}:
+    get:
+      summary: Programming Quotes Get Quote by ID
+      description: Fetch a single quote by its unique identifier.
+      operationId: getQuoteById
+      tags:
+        - Quotes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique quote identifier (MongoDB ObjectId).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Single quote payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '404':
+          description: Quote not found for the given identifier.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: Programming Quotes Update Quote
+      description: Update an existing quote's author, text, or source. Requires JWT.
+      operationId: updateQuote
+      tags:
+        - Quotes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique quote identifier (MongoDB ObjectId).
+          schema:
+            type: string
+      requestBody:
+        description: Fields to update on the quote.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteUpdate'
+      responses:
+        '200':
+          description: Updated quote payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '401':
+          description: Missing or invalid bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Quote not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Programming Quotes Delete Quote
+      description: Delete a quote by ID. Requires JWT authentication.
+      operationId: deleteQuote
+      tags:
+        - Quotes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique quote identifier (MongoDB ObjectId).
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Quote deleted successfully (no content).
+        '401':
+          description: Missing or invalid bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Quote not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /quotes/favorite/{id}:
+    post:
+      summary: Programming Quotes Add Favorite Quote
+      description: Mark a quote as a favorite for the authenticated user.
+      operationId: addFavoriteQuote
+      tags:
+        - Quotes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique quote identifier (MongoDB ObjectId).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Quote successfully marked as favorite.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '401':
+          description: Missing or invalid bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Quote not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /quotes/vote/{id}:
+    post:
+      summary: Programming Quotes Vote on Quote
+      description: Submit a 1-5 vote for a quote on behalf of the authenticated user.
+      operationId: voteQuote
+      tags:
+        - Quotes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique quote identifier (MongoDB ObjectId).
+          schema:
+            type: string
+      requestBody:
+        description: Vote payload with the new vote value (1-5).
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoteInput'
+      responses:
+        '200':
+          description: Updated quote with the new vote applied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400':
+          description: Invalid vote value (must be 1-5).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid bearer token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Quote not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /auth/token:
+    post:
+      summary: Programming Quotes Issue Auth Token
+      description: |
+        Exchange email and password credentials for a JWT bearer token used to
+        authenticate write endpoints (create / update / delete / vote / favorite).
+        If the email is not registered, a new user is created.
+      operationId: issueAuthToken
+      tags:
+        - Authentication
+      requestBody:
+        description: User credentials (email + password).
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: JWT issued for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Missing or invalid credentials payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication failed (bad password).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token issued by `POST /auth/token`. Send as `Authorization: Bearer <token>`.
+  schemas:
+    Quote:
+      type: object
+      title: Quote
+      description: A programming quote in the corpus.
+      x-schema-source: documentation
+      properties:
+        _id:
+          type: string
+          description: MongoDB ObjectId for the quote.
+          example: '5e6b3e6e3f5a8e2d1c4b9876'
+        id:
+          type: string
+          description: Alias of `_id` for client convenience (some mirrors expose this).
+          example: '5e6b3e6e3f5a8e2d1c4b9876'
+        author:
+          type: string
+          description: Quote author's name (e.g. `Edsger W. Dijkstra`).
+          example: Edsger W. Dijkstra
+        en:
+          type: string
+          description: English quote text (legacy multilingual field, may be absent on the current API).
+          example: Simplicity is prerequisite for reliability.
+        text:
+          type: string
+          description: Quote text. The current canonical API exposes this field; legacy multilingual deployments use `en`/`sr`/etc.
+          example: Simplicity is prerequisite for reliability.
+        source:
+          type: string
+          description: Optional source citation for the quote (book, talk, blog post).
+          example: EWD498 — How do we tell truths that might hurt?
+        rating:
+          type: number
+          format: float
+          description: Average user vote (1-5).
+          minimum: 1
+          maximum: 5
+          example: 4.7
+        numberOfVotes:
+          type: integer
+          description: Count of votes that contributed to the rating.
+          minimum: 0
+          example: 42
+      required:
+        - author
+    QuoteInput:
+      type: object
+      title: QuoteInput
+      description: Payload for creating a new quote.
+      properties:
+        author:
+          type: string
+          description: Quote author's name.
+          example: Linus Torvalds
+        text:
+          type: string
+          description: Quote text.
+          example: Talk is cheap. Show me the code.
+        source:
+          type: string
+          description: Optional citation.
+          example: linux-kernel mailing list, 2000-08-25
+      required:
+        - author
+        - text
+    QuoteUpdate:
+      type: object
+      title: QuoteUpdate
+      description: Partial update payload for an existing quote.
+      properties:
+        author:
+          type: string
+          description: Updated author.
+          example: Linus Torvalds
+        text:
+          type: string
+          description: Updated quote text.
+          example: Talk is cheap. Show me the code.
+        source:
+          type: string
+          description: Updated source.
+          example: linux-kernel mailing list, 2000-08-25
+    VoteInput:
+      type: object
+      title: VoteInput
+      description: Payload for casting a vote on a quote.
+      properties:
+        newVote:
+          type: integer
+          description: Vote value, integer in `[1, 5]`.
+          minimum: 1
+          maximum: 5
+          example: 5
+      required:
+        - newVote
+    AuthRequest:
+      type: object
+      title: AuthRequest
+      description: Credentials for the auth/token exchange.
+      properties:
+        email:
+          type: string
+          format: email
+          description: Account email address.
+          example: contributor@example.com
+        password:
+          type: string
+          format: password
+          description: Account password.
+          example: s3cret-correct-horse-battery
+      required:
+        - email
+        - password
+    AuthResponse:
+      type: object
+      title: AuthResponse
+      description: JWT bearer token response.
+      properties:
+        token:
+          type: string
+          description: JWT bearer token. Use as `Authorization: Bearer <token>`.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature
+      required:
+        - token
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard error payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Quote not found
+        error:
+          type: string
+          description: Short error code or class name.
+          example: NotFoundError
+      required:
+        - message

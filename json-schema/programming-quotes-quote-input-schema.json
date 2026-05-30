@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-schema/programming-quotes-quote-input-schema.json",
+  "title": "QuoteInput",
+  "description": "Payload for creating a new quote.",
+  "type": "object",
+  "properties": {
+    "author": {
+      "type": "string",
+      "description": "Quote author's name.",
+      "example": "Linus Torvalds"
+    },
+    "text": {
+      "type": "string",
+      "description": "Quote text.",
+      "example": "Talk is cheap. Show me the code."
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional citation.",
+      "example": "linux-kernel mailing list, 2000-08-25"
+    }
+  },
+  "required": ["author", "text"]
+}

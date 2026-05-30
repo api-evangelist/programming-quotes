@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-schema/programming-quotes-auth-request-schema.json",
+  "title": "AuthRequest",
+  "description": "Credentials for the auth/token exchange.",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Account email address.",
+      "example": "contributor@example.com"
+    },
+    "password": {
+      "type": "string",
+      "format": "password",
+      "description": "Account password.",
+      "example": "s3cret-correct-horse-battery"
+    }
+  },
+  "required": ["email", "password"]
+}

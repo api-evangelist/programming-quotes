@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-schema/programming-quotes-quote-update-schema.json",
+  "title": "QuoteUpdate",
+  "description": "Partial update payload for an existing quote.",
+  "type": "object",
+  "properties": {
+    "author": {
+      "type": "string",
+      "description": "Updated author.",
+      "example": "Linus Torvalds"
+    },
+    "text": {
+      "type": "string",
+      "description": "Updated quote text.",
+      "example": "Talk is cheap. Show me the code."
+    },
+    "source": {
+      "type": "string",
+      "description": "Updated source.",
+      "example": "linux-kernel mailing list, 2000-08-25"
+    }
+  }
+}

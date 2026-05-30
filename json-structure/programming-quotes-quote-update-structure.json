@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-structure/programming-quotes-quote-update-structure.json",
+  "name": "QuoteUpdate",
+  "description": "Partial update payload for an existing quote.",
+  "type": "object",
+  "properties": {
+    "author": { "type": "string", "description": "Updated author." },
+    "text": { "type": "string", "description": "Updated quote text." },
+    "source": { "type": "string", "description": "Updated source." }
+  }
+}

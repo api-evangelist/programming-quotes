@@ -1,32 +1,120 @@
 aid: programming-quotes
 name: Programming Quotes
-description: "Programming Quotes API for open source projects"
+description: >-
+  Free, open-source REST API serving a curated collection of programming-related
+  quotes. Public endpoints return random quotes, paginated lists, author filters,
+  and single quote lookups; authenticated endpoints support voting, favoriting,
+  and quote authorship (CRUD). Originally seeded from the skolakoda community
+  project on GitHub, the API is widely used as a demo data source and a free
+  data feed for developer portfolio sites, tutorials, CLIs, and IDE extensions.
 url: https://github.com/skolakoda/programming-quotes-api
 specificationVersion: '0.20'
 created: '2026-05-28'
-modified: '2026-05-28'
+modified: '2026-05-30'
 x-source: public-apis/public-apis
-x-category: "Personality"
+x-category: Personality
+x-type: opensource
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
   - Personality
   - Public APIs
+  - Open Source
+  - Quotes
+  - Programming
+  - Developer Tools
 apis:
   - name: Programming Quotes
-    description: "Programming Quotes API for open source projects"
+    description: >-
+      Public read endpoints (no auth) plus authenticated write endpoints over a
+      MongoDB-backed corpus of programming quotes. Provides random quote
+      lookups, paginated lists, author filtering, and full CRUD for authenticated
+      contributors.
     humanURL: https://github.com/skolakoda/programming-quotes-api
-    baseURL: https://github.com/skolakoda/programming-quotes-api
+    baseURL: https://programming-quotes-api.azurewebsites.net/api
     tags:
       - Personality
+      - Quotes
+      - Programming
     properties:
       - type: Documentation
+        url: https://github.com/skolakoda/programming-quotes-api#readme
+      - type: SourceCode
         url: https://github.com/skolakoda/programming-quotes-api
+      - type: OpenAPI
+        url: openapi/programming-quotes-openapi.yml
+      - type: SignUp
+        url: https://github.com/skolakoda/programming-quotes-api#auth
+      - type: NaftikoCapability
+        url: capabilities/programming-quotes-quotes.yaml
+      - type: NaftikoCapability
+        url: capabilities/programming-quotes-authentication.yaml
+      - type: JSONSchema
+        title: Quote
+        url: json-schema/programming-quotes-quote-schema.json
+      - type: JSONSchema
+        title: QuoteInput
+        url: json-schema/programming-quotes-quote-input-schema.json
+      - type: JSONSchema
+        title: QuoteUpdate
+        url: json-schema/programming-quotes-quote-update-schema.json
+      - type: JSONSchema
+        title: VoteInput
+        url: json-schema/programming-quotes-vote-input-schema.json
+      - type: JSONSchema
+        title: AuthRequest
+        url: json-schema/programming-quotes-auth-request-schema.json
+      - type: JSONSchema
+        title: AuthResponse
+        url: json-schema/programming-quotes-auth-response-schema.json
+      - type: JSONStructure
+        title: Quote
+        url: json-structure/programming-quotes-quote-structure.json
+      - type: JSONStructure
+        title: QuoteInput
+        url: json-structure/programming-quotes-quote-input-structure.json
+      - type: JSONStructure
+        title: QuoteUpdate
+        url: json-structure/programming-quotes-quote-update-structure.json
+      - type: JSONStructure
+        title: VoteInput
+        url: json-structure/programming-quotes-vote-input-structure.json
+      - type: JSONStructure
+        title: AuthRequest
+        url: json-structure/programming-quotes-auth-request-structure.json
+      - type: JSONStructure
+        title: AuthResponse
+        url: json-structure/programming-quotes-auth-response-structure.json
+      - type: Examples
+        url: examples/programming-quotes-quote-example.json
+      - type: Examples
+        url: examples/programming-quotes-quote-input-example.json
+      - type: Examples
+        url: examples/programming-quotes-quote-update-example.json
+      - type: Examples
+        url: examples/programming-quotes-vote-input-example.json
+      - type: Examples
+        url: examples/programming-quotes-auth-request-example.json
+      - type: Examples
+        url: examples/programming-quotes-auth-response-example.json
 common:
   - type: Website
     url: https://github.com/skolakoda/programming-quotes-api
+  - type: SourceCode
+    url: https://github.com/skolakoda/programming-quotes-api
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
+  - type: GitHubOrganization
+    url: https://github.com/skolakoda
+  - type: License
+    title: Unlicensed (community / open-source)
+    url: https://github.com/skolakoda/programming-quotes-api
+  - type: SpectralRuleset
+    url: rules/programming-quotes-rules.yml
+  - type: Vocabulary
+    url: vocabulary/programming-quotes-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/programming-quotes-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

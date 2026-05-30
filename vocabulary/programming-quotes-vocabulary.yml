@@ -1,0 +1,224 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Programming Quotes"
+  description: >-
+    Unified taxonomy for the Programming Quotes API — a free, community-maintained
+    REST surface serving a corpus of programming-related quotes. Captures both the
+    operational dimension (OpenAPI paths, schemas, parameters) and the capability
+    dimension (Naftiko REST/MCP exposers for Quotes and Authentication).
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+operational:
+  apis:
+    - name: "Programming Quotes"
+      namespace: "programming-quotes"
+      version: "1.0.0"
+      baseUrl: "https://programming-quotes-api.azurewebsites.net/api"
+      status: active
+      mirrors:
+        - "https://programming-quotesapi.vercel.app/api"
+        - "https://api.programming-quotes.onrender.com/api"
+        - "https://programming-quotes-api.herokuapp.com/api"
+
+  resources:
+    - name: quotes
+      api: programming-quotes
+      description: "Programming quote records (author, text, optional source, rating)."
+      actions:
+        - getRandom
+        - list
+        - getById
+        - create
+        - update
+        - delete
+        - favorite
+        - vote
+    - name: authors
+      api: programming-quotes
+      description: "Author-scoped quote lookups via the `author` query parameter on /quotes."
+      actions:
+        - list
+    - name: auth
+      api: programming-quotes
+      description: "JWT exchange for write-eligible users."
+      actions:
+        - issueToken
+
+  actions:
+    - verb: getRandom
+      httpMethod: GET
+      pattern: read
+    - verb: list
+      httpMethod: GET
+      pattern: query
+    - verb: getById
+      httpMethod: GET
+      pattern: read
+    - verb: create
+      httpMethod: POST
+      pattern: write
+    - verb: update
+      httpMethod: PUT
+      pattern: write
+    - verb: delete
+      httpMethod: DELETE
+      pattern: destructive
+    - verb: favorite
+      httpMethod: POST
+      pattern: write
+    - verb: vote
+      httpMethod: POST
+      pattern: write
+    - verb: issueToken
+      httpMethod: POST
+      pattern: write
+
+  schemas:
+    core:
+      - name: Quote
+        keyProperties: [_id, author, text, source, rating, numberOfVotes]
+      - name: QuoteInput
+        keyProperties: [author, text, source]
+      - name: QuoteUpdate
+        keyProperties: [author, text, source]
+      - name: VoteInput
+        keyProperties: [newVote]
+    auth:
+      - name: AuthRequest
+        keyProperties: [email, password]
+      - name: AuthResponse
+        keyProperties: [token]
+    errors:
+      - name: ErrorResponse
+        keyProperties: [message, error]
+
+  parameters:
+    pagination:
+      - page
+      - quotesPerPage
+    filters:
+      - author
+    identifiers:
+      - id
+
+  enums:
+    voteValues:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+
+  authentication:
+    schemes:
+      - name: bearerAuth
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+        apis: [programming-quotes]
+        appliesTo:
+          - "POST /quotes"
+          - "PUT /quotes/{id}"
+          - "DELETE /quotes/{id}"
+          - "POST /quotes/favorite/{id}"
+          - "POST /quotes/vote/{id}"
+
+# CAPABILITY DIMENSION (from Naftiko)
+capability:
+  workflows:
+    - name: "Programming Quotes — Quotes"
+      file: "capabilities/programming-quotes-quotes.yaml"
+      description: "Full Quotes surface — random/list/get/create/update/delete plus favorite and vote."
+      apis: [programming-quotes]
+      tools: 8
+      personas: [Developer, Bot Operator, Educator]
+      domains: [Quotes, Programming, Open Source]
+    - name: "Programming Quotes — Authentication"
+      file: "capabilities/programming-quotes-authentication.yaml"
+      description: "JWT issuance for write-eligible contributors."
+      apis: [programming-quotes]
+      tools: 1
+      personas: [Contributor]
+      domains: [Authentication, Open Source]
+
+  personas:
+    - id: developer
+      name: "Developer"
+      description: "Builds a portfolio page, a CLI greeter, or an IDE extension that surfaces programming quotes."
+      workflows:
+        - "Programming Quotes — Quotes"
+    - id: bot-operator
+      name: "Bot Operator"
+      description: "Runs a Slack/Discord/Mastodon bot that posts a daily programming quote."
+      workflows:
+        - "Programming Quotes — Quotes"
+    - id: educator
+      name: "Educator"
+      description: "Curates an author-filtered set of quotes for a programming course."
+      workflows:
+        - "Programming Quotes — Quotes"
+    - id: contributor
+      name: "Contributor"
+      description: "Submits or updates quotes, votes, and curates favorites."
+      workflows:
+        - "Programming Quotes — Authentication"
+        - "Programming Quotes — Quotes"
+
+  domains:
+    - Quotes
+    - Programming
+    - Open Source
+    - Authentication
+    - Developer Tools
+
+  namespaces:
+    - kind: consumes
+      name: "programming-quotes-quotes"
+    - kind: consumes
+      name: "programming-quotes-authentication"
+    - kind: rest
+      name: "programming-quotes-quotes-rest"
+      port: 8080
+    - kind: rest
+      name: "programming-quotes-authentication-rest"
+      port: 8080
+    - kind: mcp
+      name: "programming-quotes-quotes-mcp"
+      port: 9090
+    - kind: mcp
+      name: "programming-quotes-authentication-mcp"
+      port: 9090
+
+  binds:
+    - key: PROGRAMMING_QUOTES_TOKEN
+      description: "JWT bearer token from `POST /auth/token`."
+      workflows: ["Programming Quotes — Quotes"]
+    - key: PROGRAMMING_QUOTES_EMAIL
+      description: "Account email used in auth exchange."
+      workflows: ["Programming Quotes — Authentication"]
+    - key: PROGRAMMING_QUOTES_PASSWORD
+      description: "Account password used in auth exchange."
+      workflows: ["Programming Quotes — Authentication"]
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: quotes
+    operations:
+      - "GET /quotes/random → getRandomQuote"
+      - "GET /quotes → listQuotes"
+      - "GET /quotes/{id} → getQuoteById"
+      - "POST /quotes → createQuote"
+      - "PUT /quotes/{id} → updateQuote"
+      - "DELETE /quotes/{id} → deleteQuote"
+      - "POST /quotes/favorite/{id} → addFavoriteQuote"
+      - "POST /quotes/vote/{id} → voteQuote"
+    workflows: ["Programming Quotes — Quotes"]
+    personas: [Developer, Bot Operator, Educator, Contributor]
+  - resource: auth
+    operations:
+      - "POST /auth/token → issueAuthToken"
+    workflows: ["Programming Quotes — Authentication"]
+    personas: [Contributor]

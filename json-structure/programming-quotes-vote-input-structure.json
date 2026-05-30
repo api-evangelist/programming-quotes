@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-structure/programming-quotes-vote-input-structure.json",
+  "name": "VoteInput",
+  "description": "Payload for casting a vote on a quote.",
+  "type": "object",
+  "properties": {
+    "newVote": {
+      "type": "int32",
+      "description": "Vote value, integer in `[1, 5]`.",
+      "minimum": 1,
+      "maximum": 5
+    }
+  },
+  "required": ["newVote"]
+}

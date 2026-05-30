@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-schema/programming-quotes-vote-input-schema.json",
+  "title": "VoteInput",
+  "description": "Payload for casting a vote on a quote.",
+  "type": "object",
+  "properties": {
+    "newVote": {
+      "type": "integer",
+      "description": "Vote value, integer in `[1, 5]`.",
+      "minimum": 1,
+      "maximum": 5,
+      "example": 5
+    }
+  },
+  "required": ["newVote"]
+}

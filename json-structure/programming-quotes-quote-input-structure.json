@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-structure/programming-quotes-quote-input-structure.json",
+  "name": "QuoteInput",
+  "description": "Payload for creating a new quote.",
+  "type": "object",
+  "properties": {
+    "author": { "type": "string", "description": "Quote author's name." },
+    "text": { "type": "string", "description": "Quote text." },
+    "source": { "type": "string", "description": "Optional citation." }
+  },
+  "required": ["author", "text"]
+}

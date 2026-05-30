@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/programming-quotes/refs/heads/main/json-schema/programming-quotes-auth-response-schema.json",
+  "title": "AuthResponse",
+  "description": "JWT bearer token response.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "JWT bearer token. Use as `Authorization: Bearer <token>`.",
+      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature"
+    }
+  },
+  "required": ["token"]
+}
