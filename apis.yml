@@ -1,12 +1,10 @@
 aid: programming-quotes
 name: Programming Quotes
 description: >-
-  Free, open-source REST API serving a curated collection of programming-related
-  quotes. Public endpoints return random quotes, paginated lists, author filters,
-  and single quote lookups; authenticated endpoints support voting, favoriting,
-  and quote authorship (CRUD). Originally seeded from the skolakoda community
-  project on GitHub, the API is widely used as a demo data source and a free
-  data feed for developer portfolio sites, tutorials, CLIs, and IDE extensions.
+  Free, open-source REST API serving a curated collection of programming-related quotes. Public endpoints return random
+  quotes, paginated lists, author filters, and single quote lookups; authenticated endpoints support voting, favoriting,
+  and quote authorship (CRUD). Originally seeded from the skolakoda community project on GitHub, the API is widely used
+  as a demo data source and a free data feed for developer portfolio sites, tutorials, CLIs, and IDE extensions.
 url: https://github.com/skolakoda/programming-quotes-api
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -26,9 +24,8 @@ tags:
 apis:
   - name: Programming Quotes
     description: >-
-      Public read endpoints (no auth) plus authenticated write endpoints over a
-      MongoDB-backed corpus of programming quotes. Provides random quote
-      lookups, paginated lists, author filtering, and full CRUD for authenticated
+      Public read endpoints (no auth) plus authenticated write endpoints over a MongoDB-backed corpus of programming
+      quotes. Provides random quote lookups, paginated lists, author filtering, and full CRUD for authenticated
       contributors.
     humanURL: https://github.com/skolakoda/programming-quotes-api
     baseURL: https://programming-quotes-api.azurewebsites.net/api
@@ -45,10 +42,6 @@ apis:
         url: openapi/programming-quotes-openapi.yml
       - type: SignUp
         url: https://github.com/skolakoda/programming-quotes-api#auth
-      - type: NaftikoCapability
-        url: capabilities/programming-quotes-quotes.yaml
-      - type: NaftikoCapability
-        url: capabilities/programming-quotes-authentication.yaml
       - type: JSONSchema
         title: Quote
         url: json-schema/programming-quotes-quote-schema.json
