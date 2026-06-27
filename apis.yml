@@ -40,7 +40,7 @@ apis:
         url: https://github.com/skolakoda/programming-quotes-api
       - type: OpenAPI
         url: openapi/programming-quotes-openapi.yml
-      - type: SignUp
+      - type: Signup
         url: https://github.com/skolakoda/programming-quotes-api#auth
       - type: JSONSchema
         title: Quote
