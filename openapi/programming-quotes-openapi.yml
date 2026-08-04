@@ -386,7 +386,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: JWT token issued by `POST /auth/token`. Send as `Authorization: Bearer <token>`.
+      description: "JWT token issued by `POST /auth/token`. Send as `Authorization: Bearer <token>`."
   schemas:
     Quote:
       type: object
@@ -507,7 +507,7 @@ components:
       properties:
         token:
           type: string
-          description: JWT bearer token. Use as `Authorization: Bearer <token>`.
+          description: "JWT bearer token. Use as `Authorization: Bearer <token>`."
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature
       required:
         - token
