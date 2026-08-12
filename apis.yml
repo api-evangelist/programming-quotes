@@ -34,74 +34,110 @@ tags:
   - Programming
   - Developer Tools
 apis:
-  - name: Programming Quotes
-    description: >-
-      Public read endpoints (no auth) plus authenticated write endpoints over a MongoDB-backed corpus of programming
-      quotes. Provides random quote lookups, paginated lists, author filtering, and full CRUD for authenticated
-      contributors.
-    humanURL: https://github.com/skolakoda/programming-quotes-api
-    baseURL: https://programming-quotes-api.azurewebsites.net/api
-    tags:
-      - Personality
-      - Quotes
-      - Programming
-    properties:
-      - type: Documentation
-        url: https://github.com/skolakoda/programming-quotes-api#readme
-      - type: SourceCode
-        url: https://github.com/skolakoda/programming-quotes-api
-      - type: OpenAPI
-        url: openapi/programming-quotes-openapi.yml
-      - type: Signup
-        url: https://github.com/skolakoda/programming-quotes-api#auth
-      - type: JSONSchema
-        title: Quote
-        url: json-schema/programming-quotes-quote-schema.json
-      - type: JSONSchema
-        title: QuoteInput
-        url: json-schema/programming-quotes-quote-input-schema.json
-      - type: JSONSchema
-        title: QuoteUpdate
-        url: json-schema/programming-quotes-quote-update-schema.json
-      - type: JSONSchema
-        title: VoteInput
-        url: json-schema/programming-quotes-vote-input-schema.json
-      - type: JSONSchema
-        title: AuthRequest
-        url: json-schema/programming-quotes-auth-request-schema.json
-      - type: JSONSchema
-        title: AuthResponse
-        url: json-schema/programming-quotes-auth-response-schema.json
-      - type: JSONStructure
-        title: Quote
-        url: json-structure/programming-quotes-quote-structure.json
-      - type: JSONStructure
-        title: QuoteInput
-        url: json-structure/programming-quotes-quote-input-structure.json
-      - type: JSONStructure
-        title: QuoteUpdate
-        url: json-structure/programming-quotes-quote-update-structure.json
-      - type: JSONStructure
-        title: VoteInput
-        url: json-structure/programming-quotes-vote-input-structure.json
-      - type: JSONStructure
-        title: AuthRequest
-        url: json-structure/programming-quotes-auth-request-structure.json
-      - type: JSONStructure
-        title: AuthResponse
-        url: json-structure/programming-quotes-auth-response-structure.json
-      - type: Examples
-        url: examples/programming-quotes-quote-example.json
-      - type: Examples
-        url: examples/programming-quotes-quote-input-example.json
-      - type: Examples
-        url: examples/programming-quotes-quote-update-example.json
-      - type: Examples
-        url: examples/programming-quotes-vote-input-example.json
-      - type: Examples
-        url: examples/programming-quotes-auth-request-example.json
-      - type: Examples
-        url: examples/programming-quotes-auth-response-example.json
+- aid: programming-quotes:programming-quotes-authentication-api
+  name: Programming Quotes Authentication API
+  description: Programming Quotes — JWT login / register exchange.
+  humanURL: https://github.com/skolakoda/programming-quotes-api
+  baseURL: https://programming-quotes-api.azurewebsites.net/api
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/programming-quotes-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/skolakoda/programming-quotes-api#readme
+  - type: SourceCode
+    url: https://github.com/skolakoda/programming-quotes-api
+  - type: Signup
+    url: https://github.com/skolakoda/programming-quotes-api#auth
+  - type: JSONSchema
+    url: json-schema/programming-quotes-quote-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-quote-input-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-quote-update-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-vote-input-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-auth-response-schema.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-quote-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-quote-input-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-quote-update-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-vote-input-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-auth-request-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-auth-response-structure.json
+  - type: Examples
+    url: examples/programming-quotes-quote-example.json
+  - type: Examples
+    url: examples/programming-quotes-quote-input-example.json
+  - type: Examples
+    url: examples/programming-quotes-quote-update-example.json
+  - type: Examples
+    url: examples/programming-quotes-vote-input-example.json
+  - type: Examples
+    url: examples/programming-quotes-auth-request-example.json
+  - type: Examples
+    url: examples/programming-quotes-auth-response-example.json
+- aid: programming-quotes:programming-quotes-quotes-api
+  name: Programming Quotes Quotes API
+  description: Programming Quotes — Public read and authenticated write endpoints for quotes.
+  humanURL: https://github.com/skolakoda/programming-quotes-api
+  baseURL: https://programming-quotes-api.azurewebsites.net/api
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/programming-quotes-quotes-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/skolakoda/programming-quotes-api#readme
+  - type: SourceCode
+    url: https://github.com/skolakoda/programming-quotes-api
+  - type: Signup
+    url: https://github.com/skolakoda/programming-quotes-api#auth
+  - type: JSONSchema
+    url: json-schema/programming-quotes-quote-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-quote-input-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-quote-update-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-vote-input-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-auth-request-schema.json
+  - type: JSONSchema
+    url: json-schema/programming-quotes-auth-response-schema.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-quote-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-quote-input-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-quote-update-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-vote-input-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-auth-request-structure.json
+  - type: JSONStructure
+    url: json-structure/programming-quotes-auth-response-structure.json
+  - type: Examples
+    url: examples/programming-quotes-quote-example.json
+  - type: Examples
+    url: examples/programming-quotes-quote-input-example.json
+  - type: Examples
+    url: examples/programming-quotes-quote-update-example.json
+  - type: Examples
+    url: examples/programming-quotes-vote-input-example.json
+  - type: Examples
+    url: examples/programming-quotes-auth-request-example.json
+  - type: Examples
+    url: examples/programming-quotes-auth-response-example.json
 common:
   - type: DomainSecurity
     url: security/programming-quotes-domain-security.yml
