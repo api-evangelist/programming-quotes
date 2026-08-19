@@ -18,7 +18,7 @@ description: >-
   and quote authorship (CRUD). Originally seeded from the skolakoda community project on GitHub, the API is widely used
   as a demo data source and a free data feed for developer portfolio sites, tutorials, CLIs, and IDE extensions.
 url: https://github.com/skolakoda/programming-quotes-api
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-source: public-apis/public-apis
