@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Programming Quotes Authentication API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Programming Quotes Issue Auth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange email and password credentials for a JWT bearer token used to\nauthenticate write endpoints (create / update / delete / vote / favorite).\nIf the email is not registered, a new user is created.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

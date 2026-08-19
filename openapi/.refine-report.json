@@ -1,0 +1,20 @@
+{
+  "provider": "programming-quotes",
+  "sources": [
+    "programming-quotes-authentication-api-openapi.yml",
+    "programming-quotes-quotes-api-openapi.yml"
+  ],
+  "outputs": [
+    "programming-quotes-authentication-api-openapi.yml",
+    "programming-quotes-quotes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "programming-quotes-authentication-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "programming-quotes-quotes-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

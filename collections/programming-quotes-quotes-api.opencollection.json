@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Programming Quotes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Programming Quotes Get Random Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes/random"
+          },
+          "docs": "Return a single random programming quote from the corpus."
+        },
+        {
+          "info": {
+            "name": "Programming Quotes List Quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-based page number for pagination."
+              },
+              {
+                "name": "quotesPerPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of quotes to return per page."
+              },
+              {
+                "name": "author",
+                "value": "",
+                "type": "query",
+                "description": "Filter quotes by author. Use underscores in place of spaces (e.g. `Linus_Torvalds`)."
+              }
+            ]
+          },
+          "docs": "Return a paginated list of programming quotes. Supports optional filtering by\nauthor name (URL-encoded with underscores in place of spaces, e.g. `Edsger_W._Dijkstra`).\n"
+        },
+        {
+          "info": {
+            "name": "Programming Quotes Create Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new programming quote. Requires JWT authentication."
+        },
+        {
+          "info": {
+            "name": "Programming Quotes Get Quote by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique quote identifier (MongoDB ObjectId)."
+              }
+            ]
+          },
+          "docs": "Fetch a single quote by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Programming Quotes Update Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique quote identifier (MongoDB ObjectId)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing quote's author, text, or source. Requires JWT."
+        },
+        {
+          "info": {
+            "name": "Programming Quotes Delete Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique quote identifier (MongoDB ObjectId)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a quote by ID. Requires JWT authentication."
+        },
+        {
+          "info": {
+            "name": "Programming Quotes Add Favorite Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes/favorite/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique quote identifier (MongoDB ObjectId)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Mark a quote as a favorite for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Programming Quotes Vote on Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://programming-quotes-api.azurewebsites.net/api/quotes/vote/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique quote identifier (MongoDB ObjectId)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit a 1-5 vote for a quote on behalf of the authenticated user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

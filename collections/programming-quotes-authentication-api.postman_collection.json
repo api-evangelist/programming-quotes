@@ -1,0 +1,213 @@
+{
+  "item": [
+    {
+      "id": "1fa28186-df76-4127-b681-c902a649cf0e",
+      "name": "Authentication",
+      "description": {
+        "content": "Programming Quotes — JWT login / register exchange.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16da217b-c07d-472e-ae92-264fac551b2d",
+          "name": "Programming Quotes Issue Auth Token",
+          "request": {
+            "name": "Programming Quotes Issue Auth Token",
+            "description": {
+              "content": "Exchange email and password credentials for a JWT bearer token used to\nauthenticate write endpoints (create / update / delete / vote / favorite).\nIf the email is not registered, a new user is created.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auth",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "462834e5-b15c-4408-93d6-e703e6d87e29",
+              "name": "JWT issued for the user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"contributor@example.com\",\n  \"password\": \"s3cret-correct-horse-battery\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85186a48-c1f5-4746-b742-906b99b0fe02",
+              "name": "Missing or invalid credentials payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"contributor@example.com\",\n  \"password\": \"s3cret-correct-horse-battery\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Quote not found\",\n  \"error\": \"NotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c7d04cc-edcf-40a9-b5f0-154db0182b8e",
+              "name": "Authentication failed (bad password).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"contributor@example.com\",\n  \"password\": \"s3cret-correct-horse-battery\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Quote not found\",\n  \"error\": \"NotFoundError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://programming-quotes-api.azurewebsites.net/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "220fd868-f6ea-4b1c-9d17-18c0880c1a8f",
+    "name": "Programming Quotes Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Free, open-source REST API serving a curated collection of programming-related\nquotes. Public endpoints return random quotes, paginated lists, author filters,\nand single-quote lookups. Authenticated endpoints support voting, favoriting,\nand quote CRUD for contributors.\n\nCanonical source: https://github.com/skolakoda/programming-quotes-api\n\n\nContact Support:\n Name: Programming Quotes API (skolakoda)",
+      "type": "text/plain"
+    }
+  }
+}

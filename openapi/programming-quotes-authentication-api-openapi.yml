@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  title: Programming Quotes Authentication API
+  description: 'Free, open-source REST API serving a curated collection of programming-related
+
+    quotes. Public endpoints return random quotes, paginated lists, author filters,
+
+    and single-quote lookups. Authenticated endpoints support voting, favoriting,
+
+    and quote CRUD for contributors.
+
+
+    Canonical source: https://github.com/skolakoda/programming-quotes-api
+
+    '
+  version: 1.0.0
+  contact:
+    name: Programming Quotes API (skolakoda)
+    url: https://github.com/skolakoda/programming-quotes-api
+  license:
+    name: Community / Unlicensed
+    url: https://github.com/skolakoda/programming-quotes-api
+  x-generated-from: documentation
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://programming-quotes-api.azurewebsites.net/api
+  description: Primary Azure-hosted deployment (canonical)
+- url: https://programming-quotesapi.vercel.app/api
+  description: Community Vercel mirror (legacy / unofficial)
+- url: https://api.programming-quotes.onrender.com/api
+  description: Community Render mirror (legacy / unofficial)
+- url: https://programming-quotes-api.herokuapp.com/api
+  description: Legacy Heroku deployment (deprecated)
+tags:
+- name: Authentication
+  description: Programming Quotes — JWT login / register exchange.
+paths:
+  /auth/token:
+    post:
+      summary: Programming Quotes Issue Auth Token
+      description: 'Exchange email and password credentials for a JWT bearer token used to
+
+        authenticate write endpoints (create / update / delete / vote / favorite).
+
+        If the email is not registered, a new user is created.
+
+        '
+      operationId: issueAuthToken
+      tags:
+      - Authentication
+      requestBody:
+        description: User credentials (email + password).
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: JWT issued for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Missing or invalid credentials payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication failed (bad password).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AuthResponse:
+      type: object
+      title: AuthResponse
+      description: JWT bearer token response.
+      properties:
+        token:
+          type: string
+          description: 'JWT bearer token. Use as `Authorization: Bearer <token>`.'
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature
+      required:
+      - token
+    AuthRequest:
+      type: object
+      title: AuthRequest
+      description: Credentials for the auth/token exchange.
+      properties:
+        email:
+          type: string
+          format: email
+          description: Account email address.
+          example: contributor@example.com
+        password:
+          type: string
+          format: password
+          description: Account password.
+          example: s3cret-correct-horse-battery
+      required:
+      - email
+      - password
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard error payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Quote not found
+        error:
+          type: string
+          description: Short error code or class name.
+          example: NotFoundError
+      required:
+      - message
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT token issued by `POST /auth/token`. Send as `Authorization: Bearer <token>`.'
