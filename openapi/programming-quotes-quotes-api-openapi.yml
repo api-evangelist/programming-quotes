@@ -346,23 +346,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    QuoteUpdate:
-      type: object
-      title: QuoteUpdate
-      description: Partial update payload for an existing quote.
-      properties:
-        author:
-          type: string
-          description: Updated author.
-          example: Linus Torvalds
-        text:
-          type: string
-          description: Updated quote text.
-          example: Talk is cheap. Show me the code.
-        source:
-          type: string
-          description: Updated source.
-          example: linux-kernel mailing list, 2000-08-25
     VoteInput:
       type: object
       title: VoteInput
@@ -376,41 +359,6 @@ components:
           example: 5
       required:
       - newVote
-    ErrorResponse:
-      type: object
-      title: ErrorResponse
-      description: Standard error payload.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Quote not found
-        error:
-          type: string
-          description: Short error code or class name.
-          example: NotFoundError
-      required:
-      - message
-    QuoteInput:
-      type: object
-      title: QuoteInput
-      description: Payload for creating a new quote.
-      properties:
-        author:
-          type: string
-          description: Quote author's name.
-          example: Linus Torvalds
-        text:
-          type: string
-          description: Quote text.
-          example: Talk is cheap. Show me the code.
-        source:
-          type: string
-          description: Optional citation.
-          example: linux-kernel mailing list, 2000-08-25
-      required:
-      - author
-      - text
     Quote:
       type: object
       title: Quote
@@ -455,6 +403,58 @@ components:
           example: 42
       required:
       - author
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard error payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Quote not found
+        error:
+          type: string
+          description: Short error code or class name.
+          example: NotFoundError
+      required:
+      - message
+    QuoteInput:
+      type: object
+      title: QuoteInput
+      description: Payload for creating a new quote.
+      properties:
+        author:
+          type: string
+          description: Quote author's name.
+          example: Linus Torvalds
+        text:
+          type: string
+          description: Quote text.
+          example: Talk is cheap. Show me the code.
+        source:
+          type: string
+          description: Optional citation.
+          example: linux-kernel mailing list, 2000-08-25
+      required:
+      - author
+      - text
+    QuoteUpdate:
+      type: object
+      title: QuoteUpdate
+      description: Partial update payload for an existing quote.
+      properties:
+        author:
+          type: string
+          description: Updated author.
+          example: Linus Torvalds
+        text:
+          type: string
+          description: Updated quote text.
+          example: Talk is cheap. Show me the code.
+        source:
+          type: string
+          description: Updated source.
+          example: linux-kernel mailing list, 2000-08-25
   securitySchemes:
     bearerAuth:
       type: http
