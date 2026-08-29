@@ -1,4 +1,17 @@
 aid: programming-quotes
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -146,6 +159,10 @@ apis:
   - type: Examples
     url: examples/programming-quotes-auth-response-example.json
 common:
+  - type: IssueTracker
+    url: https://github.com/skolakoda/programming-quotes-api/issues
+  - type: Releases
+    url: https://github.com/skolakoda/programming-quotes-api/releases
   - type: DomainSecurity
     url: security/programming-quotes-domain-security.yml
   - type: Website
