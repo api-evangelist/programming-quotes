@@ -10,9 +10,7 @@ info:
     and quote CRUD for contributors.
 
 
-    Canonical source: https://github.com/skolakoda/programming-quotes-api
-
-    '
+    Canonical source: https://github.com/skolakoda/programming-quotes-api'
   version: 1.0.0
   contact:
     name: Programming Quotes API (skolakoda)
@@ -42,9 +40,7 @@ paths:
 
         authenticate write endpoints (create / update / delete / vote / favorite).
 
-        If the email is not registered, a new user is created.
-
-        '
+        If the email is not registered, a new user is created.'
       operationId: issueAuthToken
       tags:
       - Authentication
@@ -79,24 +75,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AuthRequest:
-      type: object
-      title: AuthRequest
-      description: Credentials for the auth/token exchange.
-      properties:
-        email:
-          type: string
-          format: email
-          description: Account email address.
-          example: contributor@example.com
-        password:
-          type: string
-          format: password
-          description: Account password.
-          example: s3cret-correct-horse-battery
-      required:
-      - email
-      - password
     AuthResponse:
       type: object
       title: AuthResponse
@@ -123,6 +101,24 @@ components:
           example: NotFoundError
       required:
       - message
+    AuthRequest:
+      type: object
+      title: AuthRequest
+      description: Credentials for the auth/token exchange.
+      properties:
+        email:
+          type: string
+          format: email
+          description: Account email address.
+          example: contributor@example.com
+        password:
+          type: string
+          format: password
+          description: Account password.
+          example: s3cret-correct-horse-battery
+      required:
+      - email
+      - password
   securitySchemes:
     bearerAuth:
       type: http

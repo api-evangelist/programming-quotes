@@ -10,9 +10,7 @@ info:
     and quote CRUD for contributors.
 
 
-    Canonical source: https://github.com/skolakoda/programming-quotes-api
-
-    '
+    Canonical source: https://github.com/skolakoda/programming-quotes-api'
   version: 1.0.0
   contact:
     name: Programming Quotes API (skolakoda)
@@ -63,9 +61,7 @@ paths:
       summary: Programming Quotes List Quotes
       description: 'Return a paginated list of programming quotes. Supports optional filtering by
 
-        author name (URL-encoded with underscores in place of spaces, e.g. `Edsger_W._Dijkstra`).
-
-        '
+        author name (URL-encoded with underscores in place of spaces, e.g. `Edsger_W._Dijkstra`).'
       operationId: listQuotes
       tags:
       - Quotes
@@ -346,6 +342,38 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    QuoteUpdate:
+      type: object
+      title: QuoteUpdate
+      description: Partial update payload for an existing quote.
+      properties:
+        author:
+          type: string
+          description: Updated author.
+          example: Linus Torvalds
+        text:
+          type: string
+          description: Updated quote text.
+          example: Talk is cheap. Show me the code.
+        source:
+          type: string
+          description: Updated source.
+          example: linux-kernel mailing list, 2000-08-25
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard error payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Quote not found
+        error:
+          type: string
+          description: Short error code or class name.
+          example: NotFoundError
+      required:
+      - message
     VoteInput:
       type: object
       title: VoteInput
@@ -403,21 +431,6 @@ components:
           example: 42
       required:
       - author
-    ErrorResponse:
-      type: object
-      title: ErrorResponse
-      description: Standard error payload.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Quote not found
-        error:
-          type: string
-          description: Short error code or class name.
-          example: NotFoundError
-      required:
-      - message
     QuoteInput:
       type: object
       title: QuoteInput
@@ -438,23 +451,6 @@ components:
       required:
       - author
       - text
-    QuoteUpdate:
-      type: object
-      title: QuoteUpdate
-      description: Partial update payload for an existing quote.
-      properties:
-        author:
-          type: string
-          description: Updated author.
-          example: Linus Torvalds
-        text:
-          type: string
-          description: Updated quote text.
-          example: Talk is cheap. Show me the code.
-        source:
-          type: string
-          description: Updated source.
-          example: linux-kernel mailing list, 2000-08-25
   securitySchemes:
     bearerAuth:
       type: http
