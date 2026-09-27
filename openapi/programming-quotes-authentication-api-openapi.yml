@@ -86,21 +86,6 @@ components:
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature
       required:
       - token
-    ErrorResponse:
-      type: object
-      title: ErrorResponse
-      description: Standard error payload.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Quote not found
-        error:
-          type: string
-          description: Short error code or class name.
-          example: NotFoundError
-      required:
-      - message
     AuthRequest:
       type: object
       title: AuthRequest
@@ -119,6 +104,21 @@ components:
       required:
       - email
       - password
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard error payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Quote not found
+        error:
+          type: string
+          description: Short error code or class name.
+          example: NotFoundError
+      required:
+      - message
   securitySchemes:
     bearerAuth:
       type: http
