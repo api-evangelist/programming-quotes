@@ -75,17 +75,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AuthResponse:
-      type: object
-      title: AuthResponse
-      description: JWT bearer token response.
-      properties:
-        token:
-          type: string
-          description: 'JWT bearer token. Use as `Authorization: Bearer <token>`.'
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature
-      required:
-      - token
     AuthRequest:
       type: object
       title: AuthRequest
@@ -119,6 +108,17 @@ components:
           example: NotFoundError
       required:
       - message
+    AuthResponse:
+      type: object
+      title: AuthResponse
+      description: JWT bearer token response.
+      properties:
+        token:
+          type: string
+          description: 'JWT bearer token. Use as `Authorization: Bearer <token>`.'
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb250cmlidXRvckBleGFtcGxlLmNvbSJ9.signature
+      required:
+      - token
   securitySchemes:
     bearerAuth:
       type: http
