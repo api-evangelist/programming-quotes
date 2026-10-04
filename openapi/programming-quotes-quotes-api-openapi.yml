@@ -386,6 +386,51 @@ components:
           example: 42
       required:
       - author
+    QuoteUpdate:
+      type: object
+      title: QuoteUpdate
+      description: Partial update payload for an existing quote.
+      properties:
+        author:
+          type: string
+          description: Updated author.
+          example: Linus Torvalds
+        text:
+          type: string
+          description: Updated quote text.
+          example: Talk is cheap. Show me the code.
+        source:
+          type: string
+          description: Updated source.
+          example: linux-kernel mailing list, 2000-08-25
+    VoteInput:
+      type: object
+      title: VoteInput
+      description: Payload for casting a vote on a quote.
+      properties:
+        newVote:
+          type: integer
+          description: Vote value, integer in `[1, 5]`.
+          minimum: 1
+          maximum: 5
+          example: 5
+      required:
+      - newVote
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard error payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Quote not found
+        error:
+          type: string
+          description: Short error code or class name.
+          example: NotFoundError
+      required:
+      - message
     QuoteInput:
       type: object
       title: QuoteInput
@@ -406,51 +451,6 @@ components:
       required:
       - author
       - text
-    VoteInput:
-      type: object
-      title: VoteInput
-      description: Payload for casting a vote on a quote.
-      properties:
-        newVote:
-          type: integer
-          description: Vote value, integer in `[1, 5]`.
-          minimum: 1
-          maximum: 5
-          example: 5
-      required:
-      - newVote
-    QuoteUpdate:
-      type: object
-      title: QuoteUpdate
-      description: Partial update payload for an existing quote.
-      properties:
-        author:
-          type: string
-          description: Updated author.
-          example: Linus Torvalds
-        text:
-          type: string
-          description: Updated quote text.
-          example: Talk is cheap. Show me the code.
-        source:
-          type: string
-          description: Updated source.
-          example: linux-kernel mailing list, 2000-08-25
-    ErrorResponse:
-      type: object
-      title: ErrorResponse
-      description: Standard error payload.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Quote not found
-        error:
-          type: string
-          description: Short error code or class name.
-          example: NotFoundError
-      required:
-      - message
   securitySchemes:
     bearerAuth:
       type: http
