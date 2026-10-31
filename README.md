@@ -1,4 +1,4 @@
-# Programming Quotes (programming-quotes)
+# Programming Quotes
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,74 +66,142 @@
 
 Free, open-source REST API serving a curated collection of programming-related quotes. Public endpoints return random quotes, paginated lists, author filters, and single quote lookups; authenticated endpoints support voting, favoriting, and quote authorship (CRUD). Originally seeded from the skolakoda community project on GitHub, the API is widely used as a demo data source and a free data feed for developer portfolio sites, tutorials, CLIs, and IDE extensions.
 
-**APIs.json:** [https://github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
+**Areas:** Personality · Public APIs · Open Source · Quotes · Programming · Developer Tools
 
-## Tags
+## Programming Quotes on APIs.io
 
-- Personality
-- Public APIs
-- Open Source
-- Quotes
-- Programming
-- Developer Tools
+Everything profiled for Programming Quotes is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/programming-quotes/](https://apis.io/providers/programming-quotes/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-05-28
-- **Modified:** 2026-05-30
+- [Programming Quotes Authentication API](https://apis.io/apis/programming-quotes/programming-quotes-authentication-api/) — Programming Quotes — JWT login / register exchange.
+- [Programming Quotes API](https://apis.io/apis/programming-quotes/programming-quotes-quotes-api/) — Programming Quotes — Public read and authenticated write endpoints for quotes.
 
-## APIs
+### Published properties
 
-### Programming Quotes
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Public read endpoints (no auth) plus authenticated write endpoints over a MongoDB-backed corpus of programming quotes. Provides random quote lookups, paginated lists, author filtering, and full CRUD for authenticated contributors.
+#### JSON Schema (6)
 
-- **Human URL:** [https://github.com/skolakoda/programming-quotes-api](https://github.com/skolakoda/programming-quotes-api)
-- **Base URL:** `https://programming-quotes-api.azurewebsites.net/api`
+The data models the API reads and writes.
 
-#### Tags
+- [AuthRequest](https://apis.io/schemas/programming-quotes/programming-quotes-auth-request/)
+- [AuthResponse](https://apis.io/schemas/programming-quotes/programming-quotes-auth-response/)
+- [Quote](https://apis.io/schemas/programming-quotes/programming-quotes-quote/)
+- [QuoteInput](https://apis.io/schemas/programming-quotes/programming-quotes-quote-input/)
+- [QuoteUpdate](https://apis.io/schemas/programming-quotes/programming-quotes-quote-update/)
+- [VoteInput](https://apis.io/schemas/programming-quotes/programming-quotes-vote-input/)
 
-- Personality
-- Quotes
-- Programming
+#### JSON Structure (6)
 
-#### Properties
+Data models expressed in JSON Structure.
 
-- [Documentation](https://github.com/skolakoda/programming-quotes-api#readme)
-- [Source Code](https://github.com/skolakoda/programming-quotes-api)
-- [OpenAPI](openapi/programming-quotes-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Sign Up](https://github.com/skolakoda/programming-quotes-api#auth)
-- [JSON Schema](json-schema/programming-quotes-quote-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/programming-quotes-quote-input-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/programming-quotes-quote-update-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/programming-quotes-vote-input-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/programming-quotes-auth-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/programming-quotes-auth-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/programming-quotes-quote-structure.json)
-- [JSON Structure](json-structure/programming-quotes-quote-input-structure.json)
-- [JSON Structure](json-structure/programming-quotes-quote-update-structure.json)
-- [JSON Structure](json-structure/programming-quotes-vote-input-structure.json)
-- [JSON Structure](json-structure/programming-quotes-auth-request-structure.json)
-- [JSON Structure](json-structure/programming-quotes-auth-response-structure.json)
-- [Examples](examples/programming-quotes-quote-example.json)
-- [Examples](examples/programming-quotes-quote-input-example.json)
-- [Examples](examples/programming-quotes-quote-update-example.json)
-- [Examples](examples/programming-quotes-vote-input-example.json)
-- [Examples](examples/programming-quotes-auth-request-example.json)
-- [Examples](examples/programming-quotes-auth-response-example.json)
+- [Programming Quotes Auth Request Structure](https://apis.io/json-structure/programming-quotes/programming-quotes-auth-request-structure/)
+- [Programming Quotes Auth Response Structure](https://apis.io/json-structure/programming-quotes/programming-quotes-auth-response-structure/)
+- [Programming Quotes Quote Input Structure](https://apis.io/json-structure/programming-quotes/programming-quotes-quote-input-structure/)
+- [Programming Quotes Quote Structure](https://apis.io/json-structure/programming-quotes/programming-quotes-quote-structure/)
+- [Programming Quotes Quote Update Structure](https://apis.io/json-structure/programming-quotes/programming-quotes-quote-update-structure/)
+- [Programming Quotes Vote Input Structure](https://apis.io/json-structure/programming-quotes/programming-quotes-vote-input-structure/)
 
-## Common Properties
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Programming Quotes Context](https://apis.io/jsonld/programming-quotes/programming-quotes-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Programming Quotes Vocabulary](https://apis.io/vocabularies/programming-quotes/programming-quotes-vocabulary/)
+
+#### Examples (6)
+
+Example requests and responses.
+
+- [Programming Quotes Auth Request Example](https://apis.io/examples/programming-quotes/programming-quotes-auth-request-example/)
+- [Programming Quotes Auth Response Example](https://apis.io/examples/programming-quotes/programming-quotes-auth-response-example/)
+- [Programming Quotes Quote Example](https://apis.io/examples/programming-quotes/programming-quotes-quote-example/)
+- [Programming Quotes Quote Input Example](https://apis.io/examples/programming-quotes/programming-quotes-quote-input-example/)
+- [Programming Quotes Quote Update Example](https://apis.io/examples/programming-quotes/programming-quotes-quote-update-example/)
+- [Programming Quotes Vote Input Example](https://apis.io/examples/programming-quotes/programming-quotes-vote-input-example/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Programming Quotes Authentication API](https://apis.io/collections/programming-quotes/open-programming-quotes-authentication-api/)
+- [Programming Quotes API](https://apis.io/collections/programming-quotes/open-programming-quotes-quotes-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Programming Quotes — jsonschema rules](https://apis.io/rules/programming-quotes/programming-quotes-jsonschema-spectral-rules/)
+- [Programming Quotes API Rules](https://apis.io/rules/programming-quotes/programming-quotes-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Programming Quotes Domain Security](https://apis.io/security/programming-quotes/programming-quotes-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://github.com/skolakoda/programming-quotes-api)
-- [Source Code](https://github.com/skolakoda/programming-quotes-api)
-- [Public APIs Listing](https://github.com/public-apis/public-apis)
-- [GitHub Organization](https://github.com/skolakoda)
-- [License](https://github.com/skolakoda/programming-quotes-api)
-- [Spectral Ruleset](rules/programming-quotes-rules.yml)
-- [Vocabulary](vocabulary/programming-quotes-vocabulary.yml)
-- [J S O N L D Context](json-ld/programming-quotes-context.jsonld)
+- [GitHub](https://github.com/skolakoda)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 34.2 |
+| Contract governance | 27.3 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 13.2 |
+
+**Agent readiness 22.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/programming-quotes/](https://apis.io/providers/programming-quotes/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Programming Quotes: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/programming-quotes/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
